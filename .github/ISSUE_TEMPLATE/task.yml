@@ -7,7 +7,7 @@ body:
     id: feature_slug
     attributes:
       label: Feature Slug
-      description: Slug of the parent feature (used for branch/plan linking).
+      description: Slug of the parent feature.
       placeholder: "oauth-token-refresh"
     validations:
       required: true
@@ -34,9 +34,8 @@ body:
     id: context
     attributes:
       label: Context / Background
-      description: Only what is necessary. Link docs/issues/PRs.
+      description: Only what is necessary.
       placeholder: |
-        - Related: #123
         - Plan: plans/<feature-slug>.md — T3
         - Notes: ...
     validations:
@@ -59,7 +58,7 @@ body:
     id: approach
     attributes:
       label: Proposed Approach
-      description: High-level steps only. Avoid low-level code dumps.
+      description: High-level steps only.
       placeholder: |
         - ...
     validations:
@@ -80,20 +79,9 @@ body:
     id: testing
     attributes:
       label: Testing / Verification
-      description: How will you verify this works?
       placeholder: |
         - [ ] Unit tests: ...
         - [ ] Manual checks: ...
-        - [ ] Commands: ...
-    validations:
-      required: false
-
-  - type: input
-    id: artifacts
-    attributes:
-      label: Artifacts / Links
-      description: Plan/doc links, designs, specs, etc.
-      placeholder: "plans/<feature-slug>.md — T3"
     validations:
       required: false
 
@@ -101,7 +89,6 @@ body:
     id: size
     attributes:
       label: Size
-      description: S and M are expected. L/XL should likely be split.
       options:
         - S (≤ 1h)
         - M (1–3h)
@@ -119,14 +106,5 @@ body:
         - P1 (high)
         - P2 (medium)
         - P3 (low)
-    validations:
-      required: false
-
-  - type: input
-    id: owner
-    attributes:
-      label: Owner
-      description: GitHub username (optional).
-      placeholder: "@your-handle"
     validations:
       required: false
