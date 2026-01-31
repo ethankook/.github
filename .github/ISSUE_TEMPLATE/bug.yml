@@ -7,7 +7,7 @@ body:
     id: feature_slug
     attributes:
       label: Feature Slug (optional)
-      description: If the bug belongs to a specific feature or initiative, provide the slug.
+      description: If this bug belongs to a specific feature.
       placeholder: "oauth-token-refresh"
     validations:
       required: false
@@ -17,7 +17,6 @@ body:
     attributes:
       label: Summary
       description: What is wrong?
-      placeholder: "X fails when Y happens."
     validations:
       required: true
 
@@ -50,19 +49,7 @@ body:
     id: evidence
     attributes:
       label: Evidence
-      description: Logs, screenshots, stack traces, links. Redact secrets.
-    validations:
-      required: false
-
-  - type: textarea
-    id: environment
-    attributes:
-      label: Environment
-      placeholder: |
-        OS:
-        Runtime/Version:
-        Browser (if relevant):
-        Commit/Branch:
+      description: Logs, screenshots, stack traces, links.
     validations:
       required: false
 
@@ -82,30 +69,8 @@ body:
     id: acceptance
     attributes:
       label: Acceptance Criteria
-      description: Verifiable checklist items.
       placeholder: |
         - [ ] Repro fixed
         - [ ] Regression test added (if appropriate)
     validations:
       required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      options:
-        - P0 (urgent)
-        - P1 (high)
-        - P2 (medium)
-        - P3 (low)
-    validations:
-      required: false
-
-  - type: input
-    id: owner
-    attributes:
-      label: Owner
-      description: GitHub username (optional).
-      placeholder: "@your-handle"
-    validations:
-      required: false
