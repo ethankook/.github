@@ -16,6 +16,7 @@ This is how GitHub expects organization-wide defaults to be structured. When you
 ### Issue Templates
 
 Located in `.github/ISSUE_TEMPLATE/`:
+- **config.yml** - Issue template chooser configuration (enables third-party tools like Raycast to discover issue types)
 - **bug.yml** - Bug report form
 - **feature.yml** - Feature request form  
 - **research.yml** - Research task form
