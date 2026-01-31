@@ -1,0 +1,116 @@
+name: Task
+description: A single, implementation-sized unit of work
+title: "task: "
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What outcome should exist when this is done?
+      placeholder: "Add X so users can Y."
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Background
+      description: Only what is necessary. Link docs/issues/PRs.
+      placeholder: |
+        - Related: #123
+        - Plan: plans/feature-x.md — T3
+        - Notes: ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in scope (and optionally out of scope).
+      placeholder: |
+        In scope:
+        - ...
+        Out of scope:
+        - ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Proposed Approach
+      description: High-level steps only. Avoid low-level code dumps.
+      placeholder: |
+        - ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Verifiable checklist items.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing / Verification
+      description: How will you verify this works?
+      placeholder: |
+        - [ ] Unit tests: ...
+        - [ ] Manual checks: ...
+        - [ ] Commands: ...
+    validations:
+      required: false
+
+  - type: input
+    id: artifacts
+    attributes:
+      label: Artifacts / Links
+      description: Plan/doc links, designs, specs, etc.
+      placeholder: "plans/feature-x.md — T3"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      description: >
+        S and M are expected.
+        L/XL indicate the task should likely be split before implementation.
+      options:
+        - S (≤ 1h)
+        - M (1–3h)
+        - L (3–6h)
+        - XL (> 6h; consider splitting)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 (urgent)
+        - P1 (high)
+        - P2 (medium)
+        - P3 (low)
+    validations:
+      required: false
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      description: GitHub username (optional).
+      placeholder: "@your-handle"
+    validations:
+      required: false
