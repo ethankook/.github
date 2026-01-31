@@ -3,11 +3,21 @@ description: Something is broken or incorrect
 title: "bug: "
 labels: ["type:bug"]
 body:
+  - type: input
+    id: feature_slug
+    attributes:
+      label: Feature Slug (optional)
+      description: If the bug belongs to a specific feature or initiative, provide the slug.
+      placeholder: "oauth-token-refresh"
+    validations:
+      required: false
+
   - type: textarea
     id: summary
     attributes:
       label: Summary
       description: What is wrong?
+      placeholder: "X fails when Y happens."
     validations:
       required: true
 
@@ -72,8 +82,30 @@ body:
     id: acceptance
     attributes:
       label: Acceptance Criteria
+      description: Verifiable checklist items.
       placeholder: |
         - [ ] Repro fixed
         - [ ] Regression test added (if appropriate)
     validations:
       required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 (urgent)
+        - P1 (high)
+        - P2 (medium)
+        - P3 (low)
+    validations:
+      required: false
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      description: GitHub username (optional).
+      placeholder: "@your-handle"
+    validations:
+      required: false
