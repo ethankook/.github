@@ -39,6 +39,15 @@ body:
       required: false
 
   - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies / Ordering Notes
+      placeholder: |
+        - None
+    validations:
+      required: false
+
+  - type: textarea
     id: scope
     attributes:
       label: Scope
