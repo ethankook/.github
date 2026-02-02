@@ -24,18 +24,6 @@ Located in `.github/ISSUE_TEMPLATE/`:
 - **task.yml** - Implementation task form
 - **config.yml** - Issue template chooser configuration
 
-**Markdown Templates (for CLI/Raycast/API):**
-- **bug.md** - Bug report template
-- **feature.md** - Feature request template
-- **research.md** - Research task template
-- **task.md** - Implementation task template
-
-The markdown versions are designed for use with GitHub CLI, API, Raycast, and other third-party tools that don't support YAML issue forms.
-
-**Usage Example (GitHub CLI):**
-```bash
-gh issue create --repo owner/repo --title "bug: Issue title" --body-file .github/ISSUE_TEMPLATE/bug.md --label "type:bug"
-```
 
 ### Pull Request Template
 
