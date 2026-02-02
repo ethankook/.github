@@ -45,6 +45,28 @@ body:
       required: true
 
   - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies / Ordering Notes
+      description: Sequencing considerations or related work.
+    validations:
+      required: false
+
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions / Unknowns
+    validations:
+      required: false
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks
+    validations:
+      required: false
+
+  - type: textarea
     id: success
     attributes:
       label: Success Criteria
@@ -65,6 +87,17 @@ body:
         - [ ] Manual smoke test: ...
     validations:
       required: true
+
+  - type: textarea
+    id: plan_metadata
+    attributes:
+      label: Plan Metadata
+      placeholder: |
+        - Path: plans/<feature_slug>.md
+        - Task count: ...
+        - Research tasks: ...
+    validations:
+      required: false
 
   - type: dropdown
     id: priority

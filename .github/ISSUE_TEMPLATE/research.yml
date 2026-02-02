@@ -21,9 +21,17 @@ body:
       required: false
 
   - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One-sentence outcome.
+    validations:
+      required: false
+
+  - type: textarea
     id: question
     attributes:
-      label: Research Question
+      label: Questions / Unknowns
       description: What do we need to learn or decide?
     validations:
       required: true
@@ -51,6 +59,22 @@ body:
       required: false
 
   - type: textarea
+    id: links
+    attributes:
+      label: Relevant Links
+    validations:
+      required: false
+
+  - type: textarea
+    id: depends_on
+    attributes:
+      label: Depends on
+      placeholder: |
+        - None
+    validations:
+      required: false
+
+  - type: textarea
     id: scope
     attributes:
       label: Scope / Constraints
@@ -59,6 +83,49 @@ body:
         - ...
         Out of scope:
         - ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing / Verification
+      placeholder: |
+        - [ ] ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+    validations:
+      required: false
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      options:
+        - S
+        - M
+        - L
+        - XL
     validations:
       required: false
 
