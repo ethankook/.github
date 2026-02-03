@@ -47,23 +47,43 @@ jobs:
             const issueNumber = issue.number;
             const issueNodeId = issue.node_id;
 
-            const labels = (issue.labels || []).map(l => (typeof l === "string" ? l : l.name));
+            const labels = (issue.labels || []).map(l => (typeof l === "string" ? l : l.name)).filter(Boolean);
             const has = (name) => labels.includes(name);
 
-            // Map labels -> Stage
+            const isFeature = has("type:feature");
+            const isTaskOrResearch = has("type:task") || has("type:research");
+
+            // Stage precedence: first match wins
+            // Keep this list ordered in strict priority (highest -> lowest).
             const stageMap = [
-              ["status:blocked", "Blocked"],
-              ["status:ready", "Ready"],
-              ["status:in-progress", "In Progress"],
+              ["state:archived", "Archive"],
               ["status:done", "Done"],
               ["status:feature-in-progress", "Feature In Progress"],
+              ["status:in-progress", "In Progress"],
+              ["status:blocked", "Blocked"],
+              ["status:ready", "Ready"],
               ["status:backlog", "Backlog"],
-              ["state:archived", "Archive"],
             ];
 
-            const stageValue = stageMap.find(([label]) => has(label))?.[1];
-            if (!stageValue) {
-              core.info("No matching status/state label found; not guessing Stage. Exiting.");
+            let stageValue = stageMap.find(([label]) => has(label))?.[1];
+
+            // Feature defaults:
+            // If it's a feature and no stage-driving label exists, default it to Backlog
+            // so features never sit in "No stage".
+            if (!stageValue && isFeature) {
+              stageValue = "Backlog";
+              core.info('Feature issue has no status/state label; defaulting Stage to "Backlog".');
+            }
+
+            // For tasks/research, preserve strictness (no guessing) unless they have an explicit label
+            if (!stageValue && isTaskOrResearch) {
+              core.info("No matching status/state label found for task/research; not guessing Stage. Exiting.");
+              return;
+            }
+
+            // If it's neither feature nor task/research, keep the existing safe behavior
+            if (!stageValue && !isFeature && !isTaskOrResearch) {
+              core.info("Issue type not recognized (no type:* label) and no status/state label found; exiting.");
               return;
             }
 
@@ -95,7 +115,7 @@ jobs:
             });
 
             const project = projectRes.organization?.projectV2;
-            if (!project) throw new Error(`ProjectV2 #${projectNumber} not found in org ${owner}`);
+            if (!project) throw new Error(\`ProjectV2 #\${projectNumber} not found in org \${owner}\`);
             const projectId = project.id;
 
             // 2) Find Stage field + option id
@@ -120,10 +140,10 @@ jobs:
             const fields = fieldsRes.node?.fields?.nodes || [];
             const stageField = fields.find(f => f?.name === stageFieldName);
 
-            if (!stageField) throw new Error(`Stage field "${stageFieldName}" not found on project`);
+            if (!stageField) throw new Error(\`Stage field "\${stageFieldName}" not found on project\`);
 
             const option = (stageField.options || []).find(o => o?.name === stageValue);
-            if (!option) throw new Error(`Stage option "${stageValue}" not found in field "${stageFieldName}"`);
+            if (!option) throw new Error(\`Stage option "\${stageValue}" not found in field "\${stageFieldName}"\`);
 
             const stageFieldId = stageField.id;
             const optionId = option.id;
@@ -143,7 +163,7 @@ jobs:
                 contentId: issueNodeId,
               });
               itemId = addRes.addProjectV2ItemById.item.id;
-              core.info(`Added issue to project. Item ID: ${itemId}`);
+              core.info(\`Added issue to project. Item ID: \${itemId}\`);
             } catch (e) {
               core.info("Issue may already be in project; locating existing item...");
               const itemQuery = `
@@ -161,7 +181,7 @@ jobs:
               const match = items.find(i => i?.project?.id === projectId);
               if (!match) throw e;
               itemId = match.id;
-              core.info(`Found existing project item. Item ID: ${itemId}`);
+              core.info(\`Found existing project item. Item ID: \${itemId}\`);
             }
 
             // 4) Update Stage field
@@ -186,4 +206,4 @@ jobs:
               optionId,
             });
 
-            core.info(`✅ Stage updated to "${stageValue}" for issue #${issueNumber}`);
+            core.info(\`✅ Stage updated to "\${stageValue}" for issue #\${issueNumber}\`);
