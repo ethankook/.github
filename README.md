@@ -56,11 +56,4 @@ Located at `.github/labels.yml` - Organization-wide label definitions that can b
 
 **📖 For detailed instructions on how to use these labels in your other repositories, see [LABEL_USAGE_GUIDE.md](LABEL_USAGE_GUIDE.md)**
 
-## Why This Structure?
 
-GitHub's special `.github` repository requires:
-1. The repository to be named `.github`
-2. Templates to be in a `.github/` directory within the repository
-3. This creates the appearance of nesting, but it's the expected structure
-
-For more information, see [GitHub's documentation on creating a default community health file](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file).
