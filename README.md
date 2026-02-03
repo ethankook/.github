@@ -29,6 +29,14 @@ Located in `.github/ISSUE_TEMPLATE/`:
 
 Located at `.github/pull_request_template.md` - Default template for all pull requests in the organization.
 
+### Labels
+
+Located at `.github/labels.yml` - Organization-wide label definitions that can be synced across repositories. These labels are referenced in the issue templates:
+- **type:bug** - Something is broken or incorrect
+- **type:feature** - A user-visible feature tracked by a plan
+- **type:task** - An implementation task under a feature plan
+- **type:research** - Investigate unknowns before implementation
+
 ## Why This Structure?
 
 GitHub's special `.github` repository requires:
