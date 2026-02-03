@@ -31,11 +31,24 @@ Located at `.github/pull_request_template.md` - Default template for all pull re
 
 ### Labels
 
-Located at `.github/labels.yml` - Organization-wide label definitions that can be synced across repositories. These labels are referenced in the issue templates:
+Located at `.github/labels.yml` - Organization-wide label definitions that can be synced across repositories using label management tools.
+
+**Type Labels** (categorize the kind of work):
 - **type:bug** - Something is broken or incorrect
-- **type:feature** - A user-visible feature tracked by a plan
-- **type:task** - An implementation task under a feature plan
-- **type:research** - Investigate unknowns before implementation
+- **type:feature** - Parent feature / epic
+- **type:task** - Implementation task
+- **type:research** - Research or investigation task
+
+**Status Labels** (track feature/task lifecycle):
+- **status:backlog** - Feature exists but not currently active
+- **status:feature-in-progress** - Currently active feature
+- **status:done** - Completed (feature or task)
+- **status:blocked** - Blocked by unmet dependencies
+- **status:ready** - Unblocked and ready to start
+- **status:in-progress** - Actively being worked on
+
+**State Labels** (archival and visibility):
+- **state:archived** - Hidden from active boards but still accessible
 
 ## Why This Structure?
 
