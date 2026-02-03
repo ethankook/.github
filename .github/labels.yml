@@ -1,0 +1,19 @@
+---
+# Organization-wide label definitions
+# These labels are referenced in issue templates and should be available across all repositories
+
+- name: type:bug
+  description: Something is broken or incorrect
+  color: d73a4a
+
+- name: type:feature
+  description: A user-visible feature tracked by a plan
+  color: a2eeef
+
+- name: type:task
+  description: An implementation task under a feature plan
+  color: 0e8a16
+
+- name: type:research
+  description: Investigate unknowns before implementation
+  color: fbca04
