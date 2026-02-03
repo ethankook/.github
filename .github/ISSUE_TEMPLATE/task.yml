@@ -112,4 +112,4 @@ body:
         - L (3–6h)
         - XL (> 6h)
     validations:
-      required: false
+      required: true
