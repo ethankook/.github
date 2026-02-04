@@ -37,11 +37,12 @@ jobs:
 
             const isTask = has("type:task");
             const isResearch = has("type:research");
+            const isBug = has("type:bug");
             const isFeature = has("type:feature");
 
-            // Only manage task/research issues here (features handled only via rollup).
-            if (!isTask && !isResearch) {
-              core.info("Not a task/research issue; skipping dependency logic.");
+            // Only manage task/research/bug issues here (features handled only via rollup).
+            if (!isTask && !isResearch && !isBug) {
+              core.info("Not a task/research/bug issue; skipping dependency logic.");
               // Still allow rollup if someone accidentally triggers this? We'll skip entirely.
               return;
             }
@@ -214,19 +215,21 @@ jobs:
             const baseQ = `repo:${owner}/${repo} is:issue is:open "Parent Feature Issue: #${featureNumber}"`;
             const openTasksQ = `${baseQ} label:"type:task"`;
             const openResearchQ = `${baseQ} label:"type:research"`;
+            const openBugsQ = `${baseQ} label:"type:bug"`;
 
             const openTasks = await searchCount(openTasksQ);
             const openResearch = await searchCount(openResearchQ);
-            const openChildren = openTasks + openResearch;
+            const openBugs = await searchCount(openBugsQ);
+            const openChildren = openTasks + openResearch + openBugs;
 
-            core.info(`Feature #${featureNumber} has open children: ${openChildren} (tasks=${openTasks}, research=${openResearch})`);
+            core.info(`Feature #${featureNumber} has open children: ${openChildren} (tasks=${openTasks}, research=${openResearch}, bugs=${openBugs})`);
 
             if (openChildren > 0) {
               core.info("Open children remain; feature not complete.");
               return;
             }
 
-            // If zero open children remain, mark feature done and archive all children (task/research) that reference it.
+            // If zero open children remain, mark feature done and archive all children (task/research/bug) that reference it.
             core.info(`No open children remain -> marking feature #${featureNumber} status:done and archiving children.`);
 
             // (a) mark feature status:done (exclusive among status labels)
@@ -267,6 +270,7 @@ jobs:
             const childItems = [
               ...(await listAllChildren("type:task")),
               ...(await listAllChildren("type:research")),
+              ...(await listAllChildren("type:bug")),
             ];
 
             // de-dup (search overlap shouldn't happen, but be safe)
